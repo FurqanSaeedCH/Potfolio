@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon FBA & Shopify Growth Expert</title>
+    <style>
+        :root {
+            --bg-dark: #07090b;
+            --bg-card: rgba(15, 20, 25, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --neon-green: #00ff66;
+            --electric-blue: #00f0ff;
+            --text-main: #ffffff;
+            --text-muted: #8e95a5;
+            --gradient-glow: linear-gradient(90deg, var(--electric-blue), var(--neon-green));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .logo,
+        .counter,
+        .massive-text {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gradient-text {
+            background: var(--gradient-glow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Background Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            background: radial-gradient(circle at 50% 0%, #0d1520 0%, var(--bg-dark) 60%);
+        }
+
+        #cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: -1;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        /* Buttons */
+        .btn-primary,
+        .btn-primary-sm {
+            background: var(--gradient-glow);
+            color: #000;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
+        }
+
+        .btn-primary-sm {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover,
+        .btn-primary-sm:hover {
+            box-shadow: 0 6px 25px rgba(0, 240, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--electric-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7, 9, 11, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--neon-green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Common Section */
+        .section-padding {
+            padding: 120px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 180px 5% 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 20px;
+            color: var(--electric-blue);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .stats-counter {
+            display: flex;
+            gap: 40px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        .stat-box h3 {
+            font-size: 2.5rem;
+            display: inline-block;
+        }
+
+        .stat-box span {
+            font-size: 2rem;
+            color: var(--neon-green);
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+        }
+
+        .stat-box p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .floating-avatar {
+            width: 90%;
+            max-width: 600px;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            text-align: center;
+            padding: 40px 5%;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .trust-badges p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            font-size: 2.5rem;
+            color: #4a5568;
+        }
+
+        .logos i {
+            transition: color 0.3s;
+        }
+
+        .logos i:hover {
+            color: var(--text-main);
+        }
+
+        /* About Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .timeline {
+            border-left: 2px solid var(--border-color);
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -37px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .timeline-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item p {
+            color: var(--text-muted);
+        }
+
+        .skills {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--gradient-glow);
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .service-card i {
+            font-size: 2rem;
+            color: var(--electric-blue);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 240, 255, 0.05);
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .step-num {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--electric-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--electric-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--electric-blue), transparent);
+            margin-top: 30px;
+            opacity: 0.3;
+        }
+
+        /* Case Studies */
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .case-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .case-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(0, 255, 102, 0.3);
+        }
+
+        .case-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .case-content {
+            padding: 30px;
+        }
+
+        .case-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .case-content p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .roi-metrics {
+            display: flex;
+            gap: 30px;
+        }
+
+        .metric span {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--neon-green);
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+        }
+
+        /* Portfolio Showcase */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Testimonials */
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            min-width: calc(33.333% - 20px);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            border-radius: 16px;
+        }
+
+        .stars {
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-card p {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-card h4 {
+            color: var(--electric-blue);
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            align-items: center;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--electric-blue);
+            background: rgba(0, 240, 255, 0.05);
+            padding: 60px 40px;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-glow);
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .pricing-card ul li {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        .pricing-card ul li i {
+            color: var(--neon-green);
+            margin-right: 10px;
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .tech-icon {
+            padding: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .tech-icon i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .tech-icon:hover {
+            border-color: var(--electric-blue);
+        }
+
+        .tech-icon:hover i {
+            color: var(--electric-blue);
+            text-shadow: 0 0 15px var(--electric-blue);
+        }
+
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        details {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        details:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        summary {
+            font-weight: 600;
+            font-size: 1.1rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details p {
+            margin-top: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        /* CTA */
+        .final-cta {
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            background: radial-gradient(circle at center, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .massive-text {
+            font-size: 4rem;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 60px 5% 20px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--electric-blue);
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: var(--text-muted);
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease-out;
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: 0.8s ease-out;
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: 0.8s ease-out;
+        }
+
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: 0.8s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .pulse-anim {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 255, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 102, 0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 120px;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .stats-counter {
+                justify-content: center;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .case-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-flow {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .step-line {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .testimonial-card {
+                min-width: calc(50% - 15px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .desktop-only {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--text-main);
+                font-size: 1.8rem;
+                cursor: pointer;
+            }
+
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(7, 9, 11, 0.98);
+                backdrop-filter: blur(15px);
+                padding: 30px 20px;
+                gap: 25px;
+                text-align: center;
+                border-bottom: 1px solid var(--border-color);
+                transform: translateY(-200%);
+                transition: transform 0.4s ease;
+                z-index: 99;
+                opacity: 0;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .section-padding {
+                padding: 60px 5%;
+            }
+
+            .hero {
+                padding: 120px 5% 60px;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .massive-text {
+                font-size: 2rem;
+            }
+
+            .stats-counter {
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+            }
+
+            .stat-box {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-card {
+                min-width: 100%;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .tech-icon {
+                padding: 20px 10px;
+            }
+
+            .logos {
+                flex-wrap: wrap;
+                gap: 20px;
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            #cursor-glow {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .price {
+                font-size: 2.5rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .case-img {
+                height: 200px;
+            }
+
+            .floating-avatar {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="cursor-glow"></div>
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="navbar fade-in">
+        <div class="logo">Muhammad<span>Furqan</span></div>
+        <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#case-studies">Case Studies</a>
+
+            <a href="#faq">FAQ</a>
+        </div>
+        <a href="#contact" class="btn-primary-sm desktop-only">Let's Talk <i class="fa-solid fa-arrow-right"></i></a>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content slide-in-left">
+                <div class="badge">ðŸš€ Amazon FBA & Shopify Growth Expert</div>
+                <h1 class="hero-title">Scaling eCommerce Brands to <span class="gradient-text">7-Figures</span> &
+                    Beyond.</h1>
+                <p class="hero-subtitle">Hi, I'm Muhammad Furqan. I build high-converting Shopify stores, optimize
+                    Amazon listings, and scale PPC campaigns to maximize your ROI. Let's dominate your niche.</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn-primary">Start Your Project</a>
+                    <a href="#case-studies" class="btn-secondary">View Case Studies</a>
+                </div>
+
+                <div class="stats-counter zoom-in">
+                    <div class="stat-box">
+                        <h3 class="counter" data-target="100">0</h3><span>+</span>
+                        <p>Stores Built</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3 class="counter" data-target="7">0</h3><span>-Fig</span>
+                        <p>Revenue Generated</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3 class="counter" data-target="500">0</h3><span>+</span>
+                        <p>Winning Products</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image zoom-in">
+                <img src="WhatsApp Image 2026-05-02 at 12.33.04 AM.jpeg" alt="Muhammad Furqan"
+                    class="floating-avatar">
+            </div>
+        </section>
+
+        <!-- Trust Badges -->
+        <section class="trust-badges fade-in">
+            <p>Trusted by 50+ Brands & Partners</p>
+            <div class="logos">
+                <i class="fa-brands fa-amazon"></i>
+                <i class="fa-brands fa-shopify"></i>
+                <i class="fa-brands fa-meta"></i>
+                <i class="fa-brands fa-google"></i>
+                <i class="fa-brands fa-stripe"></i>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about section-padding fade-in">
+            <div class="section-header">
+                <h2>My Journey to <span class="gradient-text">Expertise</span></h2>
+                <p>From a beginner dropshipper to managing multi-million dollar brands.</p>
+            </div>
+            <div class="about-grid">
+                <div class="timeline slide-in-left">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4>2018 - The Beginning</h4>
+                        <p>Launched my first Shopify dropshipping store. Failed 3 times before finding the first winning
+                            product.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4>2020 - Amazon FBA Pivot</h4>
+                        <p>Transitioned into Private Label FBA. Scaled first brand to $50k/month.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4>2023 - Agency Launch</h4>
+                        <p>Managing $1M+ in ad spend for clients across Amazon and Meta.</p>
+                    </div>
+                </div>
+                <div class="skills slide-in-right">
+                    <div class="skill">
+                        <div class="skill-info"><span>Amazon PPC Optimization</span><span>95%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-info"><span>Shopify Development</span><span>90%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-info"><span>Product Research</span><span>98%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 98%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-info"><span>Conversion Rate Optimization</span><span>85%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="services section-padding fade-in">
+            <div class="section-header">
+                <h2>Premium <span class="gradient-text">Services</span></h2>
+                <p>End-to-end solutions for eCommerce dominance.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <h3>Amazon Product Research</h3>
+                    <p>Data-driven product discovery with high demand and low competition.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    <h3>Amazon Listing Optimization</h3>
+                    <p>SEO-optimized titles, bullets, and A+ content that converts.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h3>Amazon PPC Ads Scaling</h3>
+                    <p>Advanced campaign structures to lower ACoS and boost organic rank.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-brands fa-shopify"></i>
+                    <h3>Shopify Store Development</h3>
+                    <p>High-converting, mobile-first custom Shopify storefronts.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h3>Conversion Rate Optimization</h3>
+                    <p>A/B testing and funnel tweaks to turn more visitors into buyers.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-box-open"></i>
+                    <h3>Branding & Packaging</h3>
+                    <p>Premium logo and box designs that stand out in search results.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-robot"></i>
+                    <h3>Dropshipping Automation</h3>
+                    <p>Full system setup with suppliers, fulfillment, and customer service.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-chess-king"></i>
+                    <h3>Full eCommerce Management</h3>
+                    <p>Hands-off growth. We handle everything from A to Z.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process section-padding fade-in">
+            <div class="section-header">
+                <h2>Our Proven <span class="gradient-text">Process</span></h2>
+                <p>A systematic approach to predictable growth.</p>
+            </div>
+            <div class="process-flow">
+                <div class="step">
+                    <div class="step-num">01</div>
+                    <h3>Research</h3>
+                    <p>Deep market and competitor analysis.</p>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-num">02</div>
+                    <h3>Strategy</h3>
+                    <p>Custom blueprint for launch & scaling.</p>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-num">03</div>
+                    <h3>Execution</h3>
+                    <p>Building assets and launching campaigns.</p>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-num">04</div>
+                    <h3>Scaling</h3>
+                    <p>Optimizing metrics and maximizing profit.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies -->
+        <section id="case-studies" class="case-studies section-padding fade-in">
+            <div class="section-header">
+                <h2>Real <span class="gradient-text">Results</span></h2>
+                <p>Case studies of brands we've scaled.</p>
+            </div>
+            <div class="case-grid">
+                <div class="case-card slide-in-left">
+                    <img src="amazon_case_study_1777660087293.png" alt="Amazon Case Study" class="case-img">
+                    <div class="case-content">
+                        <h3>Amazon FBA: Home Goods Niche</h3>
+                        <p>Scaled from $10k/mo to $120k/mo in 6 months using aggressive PPC and A+ Content optimization.
+                        </p>
+                        <div class="roi-metrics">
+                            <div class="metric"><span>+450%</span> ROI</div>
+                            <div class="metric"><span>12%</span> ACoS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-card slide-in-right">
+                    <img src="shopify_case_study_1777660106019.png" alt="Shopify Case Study" class="case-img">
+                    <div class="case-content">
+                        <h3>Shopify: Tech Accessories</h3>
+                        <p>Complete store redesign and Meta ads funnel setup, increasing conversion rate by 2.4%.</p>
+                        <div class="roi-metrics">
+                            <div class="metric"><span>4.8%</span> CR</div>
+                            <div class="metric"><span>3.2x</span> ROAS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Showcase -->
+        <section class="portfolio section-padding fade-in">
+            <div class="section-header">
+                <h2>Visual <span class="gradient-text">Showcase</span></h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><img src="revenue_chart_1777660122945.png" alt="Revenue Chart"></div>
+                <!-- Reusing generated images for visual showcase grid -->
+                <div class="portfolio-item"><img src="shopify_case_study_1777660106019.png" alt="Shopify Store">
+                </div>
+                <div class="portfolio-item"><img src="amazon_case_study_1777660087293.png" alt="Amazon Listing">
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials section-padding fade-in">
+            <div class="section-header">
+                <h2>Client <span class="gradient-text">Reviews</span></h2>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonial-track">
+                    <div class="testimonial-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i></div>
+                        <p>"Absolutely blew our expectations out of the water. Our Amazon sales tripled in Q4 thanks to
+                            his PPC strategies."</p>
+                        <h4>- Sarah J., 7-Figure Seller</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i></div>
+                        <p>"The Shopify store redesign is gorgeous and our conversion rate jumped from 1.2% to 3.5% in
+                            the first week."</p>
+                        <h4>- Mark T., Brand Owner</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i></div>
+                        <p>"He handled everything for our product launch. From keyword research to ranking. Worth every
+                            penny."</p>
+                        <h4>- Elena R., FBA Entrepreneur</h4>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Tools & Tech Stack -->
+        <section class="tools section-padding fade-in">
+            <div class="section-header">
+                <h2>Tech <span class="gradient-text">Stack</span></h2>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-icon"><i class="fa-brands fa-amazon"></i><br>Seller Central</div>
+                <div class="tech-icon"><i class="fa-brands fa-shopify"></i><br>Shopify</div>
+                <div class="tech-icon"><i class="fa-solid fa-chart-bar"></i><br>Helium 10</div>
+                <div class="tech-icon"><i class="fa-solid fa-leaf"></i><br>Jungle Scout</div>
+                <div class="tech-icon"><i class="fa-brands fa-google"></i><br>Analytics</div>
+                <div class="tech-icon"><i class="fa-brands fa-meta"></i><br>Meta Ads</div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq section-padding fade-in">
+            <div class="section-header">
+                <h2>Frequently Asked <span class="gradient-text">Questions</span></h2>
+            </div>
+            <div class="faq-list">
+                <details>
+                    <summary>How long does it take to see results? <i class="fa-solid fa-chevron-down"></i></summary>
+                    <p>For Amazon PPC, you can start seeing changes in ACoS and sales volume within the first 2-3 weeks.
+                        For a new product launch, ranking typically takes 4-6 weeks of aggressive strategy.</p>
+                </details>
+                <details>
+                    <summary>Do you guarantee sales? <i class="fa-solid fa-chevron-down"></i></summary>
+                    <p>While no one can legally guarantee specific sales figures, we guarantee to apply the exact proven
+                        frameworks that have generated 7-figures for our clients.</p>
+                </details>
+                <details>
+                    <summary>What is your typical ROAS/ACoS target? <i class="fa-solid fa-chevron-down"></i></summary>
+                    <p>It depends on your product margin and lifecycle stage. For mature products, we aim for sub-25%
+                        ACoS on Amazon, and 3x+ ROAS on Meta ads for Shopify.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section id="contact" class="final-cta section-padding fade-in">
+            <h2 class="massive-text">Letâ€™s Build Your <span class="gradient-text">7-Figure</span> eCommerce Brand ðŸš€
+            </h2>
+            <a href="mailto:mfurqansaeedch786@gmail.com" class="btn-primary pulse-anim">Book a Free Consultation</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Muhammad<span>Furqan</span></h3>
+                <p>Scaling eCommerce brands with data-driven precision.</p>
+            </div>
+            <div class="footer-social">
+                <a href="https://wa.me/923271773257" target="_blank" rel="noopener noreferrer"><i
+                        class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.linkedin.com/in/furqansaeed1003" target="_blank" rel="noopener noreferrer"><i
+                        class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/furqansaeed_ch?igsh=NWtweW4wMzQwcmw4" target="_blank"
+                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/share/1FWxe8MTAU/" target="_blank" rel="noopener noreferrer"><i
+                        class="fa-brands fa-facebook-f"></i></a>
+                <a href="mailto:mfurqansaeedch786@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Muhammad Furqan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Cursor Glow
+        const cursorGlow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // Canvas Particles Background
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.color = Math.random() > 0.5 ? 'rgba(0, 255, 102, 0.2)' : 'rgba(0, 240, 255, 0.2)';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > width || this.x < 0) this.speedX *= -1;
+                if (this.y > height || this.y < 0) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            let numParticles = Math.floor((width * height) / 15000);
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            initCanvas();
+            createParticles();
+        });
+
+        initCanvas();
+        createParticles();
+        animateParticles();
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    // Start counter if it's the stats section
+                    if (entry.target.classList.contains('hero-content')) {
+                        startCounters();
+                    }
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .zoom-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initial trigger for top elements
+        setTimeout(() => {
+            document.querySelectorAll('.navbar, .hero-content, .hero-image').forEach(el => {
+                el.classList.add('visible');
+            });
+            startCounters();
+        }, 100);
+
+        // Stat Counter Animation
+        let countersStarted = false;
+        function startCounters() {
+            if (countersStarted) return;
+            countersStarted = true;
+
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Testimonial Slider logic
+        const track = document.getElementById('testimonial-track');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+
+        function updateSlider() {
+            if (!track) return;
+            const cards = document.querySelectorAll('.testimonial-card');
+
+            // Default sliding for desktop (3 cards) vs mobile (1 card)
+            let cardWidth = cards[0].offsetWidth + 30; // 30 is the gap
+
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (dots[currentIndex]) {
+                dots[currentIndex].classList.add('active');
+            }
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlider();
+            });
+        });
+
+        // Auto slide
+        setInterval(() => {
+            const maxIndex = window.innerWidth <= 768 ? 2 : 0;
+            // Simplified slider logic based on screen size
+            if (window.innerWidth > 1024) return; // Desktop shows all 3, no slide needed usually
+
+            currentIndex++;
+            if (currentIndex > dots.length - 1) {
+                currentIndex = 0;
+            }
+            updateSlider();
+        }, 5000);
+
+        // FAQ Details animation patch
+        const details = document.querySelectorAll('details');
+        details.forEach(targetDetail => {
+            targetDetail.addEventListener('click', () => {
+                details.forEach(detail => {
+                    if (detail !== targetDetail) {
+                        detail.removeAttribute('open');
+                    }
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = mobileBtn.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileBtn.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+                });
+            });
+        }
+
+    </script>
+</body>
+
+</html>
